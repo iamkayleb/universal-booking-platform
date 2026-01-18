@@ -11,7 +11,7 @@ function App() {
 
   // 1. Load Services
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/services/')
+    axios.get('https://universal-booking-platform.onrender.com/services/')
       .then(res => {
         console.log("✅ Services Loaded:", res.data)
         setServices(res.data)
@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     if (token) {
       console.log("🔄 Fetching bookings with token...")
-      axios.get('http://127.0.0.1:8000/my-bookings/', {
+      axios.get('https://universal-booking-platform.onrender.com/my-bookings/', {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -41,7 +41,7 @@ function App() {
     formData.append('password', password)
 
     try {
-      const res = await axios.post('http://127.0.0.1:8000/token', formData)
+      const res = await axios.post('https://universal-booking-platform.onrender.com/token', formData)
       console.log("✅ Login Success, Token:", res.data.access_token)
       setToken(res.data.access_token)
     } catch (err) {
@@ -56,13 +56,13 @@ function App() {
     if (!startTime) return
 
     try {
-      await axios.post('http://127.0.0.1:8000/bookings/', 
+      await axios.post('https://universal-booking-platform.onrender.com/bookings/', 
         { service_id: serviceId, start_time: startTime },
         { headers: { Authorization: `Bearer ${token}` } }
       )
       alert("Booking Confirmed!")
       // Refresh list
-      const res = await axios.get('http://127.0.0.1:8000/my-bookings/', {
+      const res = await axios.get('https://universal-booking-platform.onrender.com/my-bookings/', {
         headers: { Authorization: `Bearer ${token}` }
       })
       setMyBookings(res.data)
